@@ -1,0 +1,715 @@
+LIBDQLITE[037511] 2023-11-28T18:40:04.412473396 037535 DEBUG   impl_listen          src/transport.c:55  impl listen
+LIBDQLITE[037511] 2023-11-28T18:40:04.413274333 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.413301612 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 1 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413307459 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.413313071 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 2 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413350731 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 1 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413391268 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 1 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413398149 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 1 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413403171 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 1 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413410360 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 1 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413415471 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 1 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413422355 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 1 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413427329 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 1, gw_id: 2 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413431980 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 2 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413436615 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.413441473 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.413446537 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.413453737 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 2 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413463149 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 1 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413551593 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 1 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413560564 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 2 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413565387 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.413570202 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 2 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413574975 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 1 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413586682 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.413591777 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.413596491 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 1 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.413601130 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:04.426550889 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.426575759 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 3 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426583537 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.426590873 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 4 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426611971 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 3 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426650231 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 3 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426658346 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 3 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426665226 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 3 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426674947 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 3 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426681751 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 3 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426692191 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 3 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426699198 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 3, gw_id: 4 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426705703 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 4 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426711943 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.426718373 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.426725306 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.426732710 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 4 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426739686 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 3 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426790214 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 3 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426799859 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 4 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426806328 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.426812995 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 4 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426819505 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 3 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.426990319 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.427009411 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.427017738 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 3 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.427024378 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:04.436627502 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.436665010 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 5 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436677033 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.436688056 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 6 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436700380 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 5 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436793754 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 5 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436809332 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 5 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436837553 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 5 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436853967 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 5 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436864595 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 5 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436879286 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 5 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436889792 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 5, gw_id: 6 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436899581 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 6 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436909231 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.436919155 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.436929600 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.436940947 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 6 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.436951889 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 5 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437033241 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 5 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437048662 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 6 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437058910 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.437069239 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 6 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437079239 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 5 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437178648 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.437193581 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.437204219 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 5 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.437213833 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:04.617611361 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.617662847 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 7 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617678935 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.617694596 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 8 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617711743 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 7 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617776473 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 7 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617793234 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 7 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617807167 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 7 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617826848 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 7 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617841380 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 7 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617863477 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 7 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617900921 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 7, gw_id: 8 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617914687 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 8 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617927854 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.617941448 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.617955753 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.617971346 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 8 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.617985947 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 7 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618117684 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 7 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618137653 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 8 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618151422 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.618165718 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 8 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618179467 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 7 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618470879 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.618509362 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.618526316 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 7 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.618540156 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:04.629868577 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.629916121 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 9 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.629932302 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.629947519 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 10 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.629964386 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 9 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630064910 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 9 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630094938 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 9 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630109413 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 9 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630131108 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 9 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630145335 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 9 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630167606 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 9 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630181951 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 9, gw_id: 10 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630195588 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 10 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630208717 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.630222439 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.630267408 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.630284072 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 10 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630298934 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 9 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630395653 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 9 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630415096 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 10 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630428554 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.630442440 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 10 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630456190 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 9 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630757512 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.630796151 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.630813108 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 9 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.630827002 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:04.640993183 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:04.641040590 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 11 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641056823 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:04.641072028 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 12 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641088843 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 11 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641151645 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 11 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641168242 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 11 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641182172 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 11 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641201607 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 11 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641215916 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 11 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641237820 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 11 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641252231 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 11, gw_id: 12 |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641265742 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 12 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641278943 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:04.641292432 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:04.641306909 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:04.641322358 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 12 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641336899 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 11 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641462296 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 11 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641482452 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 12 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641496017 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:04.641510087 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 12 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641523783 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 11 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641814338 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:04.641853414 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:04.641870385 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 11 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:04.641884459 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.021927293 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.021981034 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 13 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.021998403 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.022015328 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 14 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022068905 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 13 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022143472 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 13 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022161572 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 13 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022177299 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 13 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022198404 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 13 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022214297 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 13 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022236915 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 13 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022251930 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 13, gw_id: 14 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022265958 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 14 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022279158 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.022292841 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.022307341 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.022322723 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 14 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022337356 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 13 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022433963 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 13 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022453325 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 14 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022466954 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.022481550 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 14 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022519219 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 13 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022805197 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.022843968 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.022861188 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 13 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.022874949 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.034190282 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.034238971 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 15 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034255449 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.034270887 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 16 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034287742 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 15 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034393284 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 15 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034412393 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 15 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034426444 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 15 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034446830 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 15 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034461396 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 15 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034481109 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 15 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034495595 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 15, gw_id: 16 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034508965 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 16 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034522073 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.034535579 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.034550161 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.034565696 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 16 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034580166 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 15 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034661572 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 15 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034680482 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 16 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034693987 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.034708072 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 16 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.034721819 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 15 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.035018694 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.035057646 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.035098464 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 15 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.035113389 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.045369040 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.045418507 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 17 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045435680 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.045452409 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 18 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045470428 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 17 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045536685 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 17 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045554397 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 17 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045569684 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 17 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045590350 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 17 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045606099 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 17 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045629718 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 17 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045645543 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 17, gw_id: 18 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045659925 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 18 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045674195 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.045688791 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.045704311 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.045721077 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 18 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045736640 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 17 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045843192 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 17 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045863221 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 18 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045878145 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.045893016 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 18 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.045908129 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 17 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.046168417 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.046191462 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.046206412 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 17 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.046219960 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.825652449 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.825702053 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 19 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825744316 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.825760412 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 20 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825777547 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 19 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825845686 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 19 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825862190 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 19 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825876407 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 19 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825895797 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 19 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825910163 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 19 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825932063 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 19 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825946449 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 19, gw_id: 20 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825959953 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 20 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.825973138 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.825986690 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.826001338 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.826016878 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 20 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826068289 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 19 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826169479 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 19 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826188655 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 20 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826202373 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.826216717 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 20 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826230471 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 19 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826543179 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.826581935 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.826598877 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 19 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.826612751 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.839023839 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.839071347 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 21 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839087187 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.839102402 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 22 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839119577 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 21 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839182112 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 21 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839220671 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 21 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839234901 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 21 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839255549 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 21 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839269983 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 21 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839291714 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 21 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839306336 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 21, gw_id: 22 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839320009 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 22 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839333072 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.839346732 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.839361215 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.839376861 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 22 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839391402 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 21 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839567166 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 21 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839593126 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 22 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839606605 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.839620392 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 22 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839634051 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 21 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.839952301 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.839991210 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.840008392 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 21 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.840022726 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:05.850421743 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:05.850485631 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 23 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850502248 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:05.850517692 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 24 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850534517 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 23 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850600744 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 23 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850617430 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 23 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850631702 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 23 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850651089 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 23 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850687342 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 23 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850710080 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 23 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850724714 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 23, gw_id: 24 |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850738447 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 24 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850751669 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:05.850765149 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:05.850779416 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:05.850795088 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 24 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850809451 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 23 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850906006 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 23 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850925267 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 24 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850939112 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:05.850953295 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 24 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:05.850967057 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 23 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:05.851256052 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:05.851294747 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:05.851311781 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 23 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:05.851325770 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:06.829907142 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:06.829978173 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 25 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830008029 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:06.830083351 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 26 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830119047 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 25 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830222572 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 25 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830258387 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 25 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830283030 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 25 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830317572 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 25 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830344650 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 25 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830386493 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 25 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830412380 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 25, gw_id: 26 |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830437842 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 26 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830499224 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:06.830526137 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:06.830554732 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:06.830584488 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 26 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830612833 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 25 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830732153 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 25 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830755508 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 26 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830769265 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:06.830783530 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 26 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.830797406 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 25 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.831011326 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:06.831056340 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:06.831087589 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 25 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:06.831112690 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:06.843228846 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:06.843280060 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 27 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843296995 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:06.843313468 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 28 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843331617 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 27 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843397477 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 27 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843414978 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 27 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843430240 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 27 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843525836 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 27 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843549345 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 27 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843574386 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 27 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843590564 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 27, gw_id: 28 |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843605446 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 28 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843620563 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:06.843635187 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:06.843650544 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:06.843695101 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 28 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843711596 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 27 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843814229 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 27 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843834602 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 28 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843849161 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:06.843864805 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 28 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.843879506 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 27 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.844128419 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:06.844167973 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:06.844185008 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 27 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:06.844198933 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:06.854501081 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:06.854548579 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 29 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854564855 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:06.854580238 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 30 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854597215 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 29 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854662198 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 29 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854678760 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 29 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854692766 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 29 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854712141 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 29 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854726633 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 29 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854748416 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 29 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854762986 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 29, gw_id: 30 |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854776437 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 30 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854789436 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:06.854803134 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:06.854817467 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:06.854832795 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 30 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854847097 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 29 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854948554 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 29 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.854967943 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 30 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:06.855005917 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:06.855020819 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 30 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:06.855034821 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 29 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:06.855277019 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:06.855301539 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:06.855315767 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 29 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:06.855328920 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:07.833846225 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:07.833896211 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 31 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.833912841 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:07.833928596 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 32 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:07.833946662 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 31 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834013254 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 31 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834030903 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 31 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834094074 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 31 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834116951 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 31 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834131940 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 31 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834154231 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 31 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834168968 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 31, gw_id: 32 |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834182635 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 32 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834196309 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:07.834209910 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:07.834224726 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:07.834240119 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 32 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834255232 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 31 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834353122 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 31 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834372011 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 32 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834385602 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:07.834399663 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 32 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834413410 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 31 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834734405 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:07.834773948 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:07.834791139 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 31 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:07.834804859 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:07.847677084 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:07.847725611 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 33 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847742966 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:07.847759085 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 34 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847776737 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 33 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847902890 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 33 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847923782 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 33 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847939560 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 33 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847962001 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 33 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847977649 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 33 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.847999131 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 33 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848014753 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 33, gw_id: 34 |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848029586 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 34 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848043829 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:07.848058218 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:07.848073651 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:07.848090326 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 34 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848105869 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 33 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848203840 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 33 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848223804 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 34 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848238330 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:07.848253190 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 34 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848267987 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 33 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848398095 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:07.848418256 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:07.848434035 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 33 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:07.848448217 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:07.858242193 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:07.858290341 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 35 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858306427 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:07.858321771 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 36 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858338611 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 35 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858405579 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 35 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858422107 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 35 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858435943 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 35 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858456790 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 35 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858471248 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 35 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858491646 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 35 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858506079 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 35, gw_id: 36 |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858519454 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 36 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858532661 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:07.858546211 037535 DEBUG   handle_leader        src/gateway.c:227 handle leader
+LIBDQLITE[037511] 2023-11-28T18:40:07.858560746 037535 DEBUG   handle_leader        src/gateway.c:241 handle leader - dispatch to 2683934030160342034
+LIBDQLITE[037511] 2023-11-28T18:40:07.858575983 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 36 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858590429 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 35 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858691756 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 35 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858711129 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 36 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858724847 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:07.858738952 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 36 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:07.858752644 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 35 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.859060318 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:07.859098738 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:07.859115703 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 35 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:07.859129615 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:07.870213295 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:07.870279609 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 37 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870303579 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:07.870320823 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 38 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870372801 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 37 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870607115 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 37 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870631731 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 37 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870647042 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 37 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870667650 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 37 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870682291 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 37 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870701949 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 37 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:07.870715192 037535 DEBUG   raft_connect         src/conn.c:122 raft_connect
+LIBDQLITE[037511] 2023-11-28T18:40:07.870736197 037535 DEBUG   raftProxyAccept      src/transport.c:272 raft proxy accept
+LIBDQLITE[037511] 2023-11-28T18:40:07.870780417 037535 DEBUG   impl_connect         src/transport.c:169 impl connect id:3297041220608546238 address:127.0.0.1:9001
+LIBDQLITE[037511] 2023-11-28T18:40:07.872088092 037547 DEBUG   connect_work_cb      src/transport.c:63  connect work cb
+LIBDQLITE[037511] 2023-11-28T18:40:07.874976692 037535 DEBUG   connect_after_work_cb src/transport.c:139 connect after work cb status 0
+LIBDQLITE[037511] 2023-11-28T18:40:08.849765714 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:08.849775793 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 39 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849778567 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:08.849781307 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 40 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849794837 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 39 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849944018 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 39 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849947830 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 39 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849950328 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 39 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849971146 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 39 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849974276 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 39 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849978113 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 39 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849980600 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 39, gw_id: 40 |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849982982 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 40 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849985307 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:08.849987863 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:08.849990515 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 40 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.849993154 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 39 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850011496 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 39 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850019152 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 40 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850021633 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:08.850024362 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 40 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850026861 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 39 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850059005 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:08.850062657 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:08.850065264 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 39 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:08.850067679 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:08.854409557 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:08.854416964 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 41 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854419894 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:08.854422773 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 42 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854426029 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 41 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854438171 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 41 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854441457 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 41 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854444266 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 41 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854521741 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 41 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854529179 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 41 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854534009 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 41 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854536739 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 41, gw_id: 42 |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854539188 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 42 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854541586 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:08.854544212 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:08.854546974 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 42 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854549712 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 41 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854563860 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 41 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854567203 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 42 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854569763 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:08.854572350 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 42 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854574903 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 41 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854692348 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:08.854701725 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:08.854704491 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 41 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:08.854706910 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:08.869027556 037535 DEBUG   fsm__apply           src/fsm.c:315 fsm apply
+LIBDQLITE[037511] 2023-11-28T18:40:08.869081522 037535 DEBUG   apply_frames         src/fsm.c:188 fsm apply frames
+LIBDQLITE[037511] 2023-11-28T18:40:08.869101832 037535 DEBUG   db__init             src/db.c:21  db init demo
+LIBDQLITE[037511] 2023-11-28T18:40:08.869130604 037535 DEBUG   open_follower_conn   src/db.c:91  open follower conn: demo page_size:4096
+LIBDQLITE[037511] 2023-11-28T18:40:08.869932960 037535 DEBUG   VfsApply             src/vfs.c:2362 vfs apply filename demo n 3
+LIBDQLITE[037511] 2023-11-28T18:40:08.869988848 037535 DEBUG   maybeCheckpoint      src/fsm.c:88  maybe checkpoint
+LIBDQLITE[037511] 2023-11-28T18:40:08.870006355 037535 DEBUG   open_follower_conn   src/db.c:91  open follower conn: demo page_size:4096
+LIBDQLITE[037511] 2023-11-28T18:40:08.870534514 037535 DEBUG   maybeCheckpoint      src/fsm.c:131 wal size (3) < threshold (1000)
+LIBDQLITE[037511] 2023-11-28T18:40:08.870594697 037535 DEBUG   fsm__apply           src/fsm.c:315 fsm apply
+LIBDQLITE[037511] 2023-11-28T18:40:08.870612345 037535 DEBUG   apply_frames         src/fsm.c:188 fsm apply frames
+LIBDQLITE[037511] 2023-11-28T18:40:08.870629601 037535 DEBUG   VfsApply             src/vfs.c:2362 vfs apply filename demo n 2
+LIBDQLITE[037511] 2023-11-28T18:40:08.870663582 037535 DEBUG   maybeCheckpoint      src/fsm.c:88  maybe checkpoint
+LIBDQLITE[037511] 2023-11-28T18:40:08.870679401 037535 DEBUG   open_follower_conn   src/db.c:91  open follower conn: demo page_size:4096
+LIBDQLITE[037511] 2023-11-28T18:40:08.870974795 037535 DEBUG   maybeCheckpoint      src/fsm.c:131 wal size (5) < threshold (1000)
+LIBDQLITE[037511] 2023-11-28T18:40:08.871027661 037535 DEBUG   fsm__apply           src/fsm.c:315 fsm apply
+LIBDQLITE[037511] 2023-11-28T18:40:08.871043903 037535 DEBUG   apply_frames         src/fsm.c:188 fsm apply frames
+LIBDQLITE[037511] 2023-11-28T18:40:08.871059980 037535 DEBUG   VfsApply             src/vfs.c:2362 vfs apply filename demo n 2
+LIBDQLITE[037511] 2023-11-28T18:40:08.871092403 037535 DEBUG   maybeCheckpoint      src/fsm.c:88  maybe checkpoint
+LIBDQLITE[037511] 2023-11-28T18:40:08.871107973 037535 DEBUG   open_follower_conn   src/db.c:91  open follower conn: demo page_size:4096
+LIBDQLITE[037511] 2023-11-28T18:40:08.871394579 037535 DEBUG   maybeCheckpoint      src/fsm.c:131 wal size (7) < threshold (1000)
+LIBDQLITE[037511] 2023-11-28T18:40:08.871681753 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:08.871713715 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 43 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871728829 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:08.871743934 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 44 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871773724 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 43 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871833810 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 43 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871850716 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 43 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871864924 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 43 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871884904 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 43 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871899357 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 43 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871942217 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 43 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871957773 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 43, gw_id: 44 |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871971782 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 44 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.871985687 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:08.871999531 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:08.872014393 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 44 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872028567 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 43 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872111956 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 43 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872129447 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 44 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872142922 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:08.872156893 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 44 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872170506 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 43 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872481842 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:08.872521760 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:08.872539276 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 43 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:08.872553417 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:09.870598281 037535 DEBUG   fsm__apply           src/fsm.c:315 fsm apply
+LIBDQLITE[037511] 2023-11-28T18:40:09.870652217 037535 DEBUG   apply_frames         src/fsm.c:188 fsm apply frames
+LIBDQLITE[037511] 2023-11-28T18:40:09.870678457 037535 DEBUG   VfsApply             src/vfs.c:2362 vfs apply filename demo n 2
+LIBDQLITE[037511] 2023-11-28T18:40:09.870712931 037535 DEBUG   maybeCheckpoint      src/fsm.c:88  maybe checkpoint
+LIBDQLITE[037511] 2023-11-28T18:40:09.870730584 037535 DEBUG   open_follower_conn   src/db.c:91  open follower conn: demo page_size:4096
+LIBDQLITE[037511] 2023-11-28T18:40:09.871236637 037535 DEBUG   maybeCheckpoint      src/fsm.c:131 wal size (9) < threshold (1000)
+LIBDQLITE[037511] 2023-11-28T18:40:15.467313602 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:15.467328567 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 45 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467336696 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:15.467339753 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 46 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467349556 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 45 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467355897 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:15.467358612 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 47 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467360840 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:15.467363229 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 48 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467369764 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 47 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467374723 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:15.467377228 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 49 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467379463 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:15.467381821 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 50 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467384476 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 49 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467397661 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 45 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467400578 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 45 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467403056 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 45 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467406479 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 45 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467408963 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 45 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467412708 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 45 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467415201 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 45, gw_id: 46 |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467417543 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 46 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467419935 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:15.467422347 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:15.467424855 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 46 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467427306 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 45 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467439497 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 47 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467442529 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 47 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467444882 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 47 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467510600 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 47 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467513313 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 47 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467516777 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 47 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467519211 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 47, gw_id: 48 |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467526350 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 48 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467528946 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:15.467531416 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:15.467533883 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 48 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467536343 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 47 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467552457 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 49 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467555525 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 49 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467557897 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 49 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467561115 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 49 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467567175 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 49 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467570651 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 49 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467573070 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 49, gw_id: 50 |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467575346 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 50 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467577567 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:15.467579819 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:15.467582212 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 50 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467584536 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 49 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467595879 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 45 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467598969 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 46 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467601311 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:15.467603808 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 46 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467606176 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 45 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467608631 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 47 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467610957 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 48 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467613123 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:15.467615365 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 48 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467617595 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 47 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467619885 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 49 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467626825 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 50 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467629491 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:15.467631793 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 50 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467634096 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 49 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467642833 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:15.467645299 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:15.467647722 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 45 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467650068 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:15.467671152 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:15.467674316 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:15.467676692 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 49 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467678883 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:15.467730820 037535 DEBUG   read_message_cb      src/conn.c:207 read error -4095
+LIBDQLITE[037511] 2023-11-28T18:40:15.467735127 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:15.467737628 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 47 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467739900 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:15.467901225 037535 DEBUG   conn__start          src/conn.c:319 conn start
+LIBDQLITE[037511] 2023-11-28T18:40:15.467907568 037535 DEBUG   conn__start          src/conn.c:322 @@@ conn-state sm_id: 51 conn_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467910204 037535 DEBUG   gateway__init        src/gateway.c:20  gateway init
+LIBDQLITE[037511] 2023-11-28T18:40:15.467912651 037535 DEBUG   gateway__init        src/gateway.c:35  @@@ gw-state sm_id: 52 gw_inited |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467915574 037535 DEBUG   read_protocol        src/conn.c:298 @@@ conn-state sm_id: 51 conn_proto_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467926008 037535 DEBUG   read_protocol_cb     src/conn.c:264 @@@ conn-state sm_id: 51 conn_proto_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467928770 037535 DEBUG   read_protocol_cb     src/conn.c:275 @@@ conn-state sm_id: 51 conn_proto_check_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467931170 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 51 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467934490 037535 DEBUG   read_message_cb      src/conn.c:217 @@@ conn-state sm_id: 51 conn_msg_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467936897 037535 DEBUG   read_request         src/conn.c:190 @@@ conn-state sm_id: 51 conn_req_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467940445 037535 DEBUG   read_request_cb      src/conn.c:156 @@@ conn-state sm_id: 51 conn_req_read_ok |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467942901 037535 DEBUG   read_request_cb      src/conn.c:164 @@@ conn-to-gw conn_id: 51, gw_id: 52 |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467945180 037535 DEBUG   read_request_cb      src/conn.c:165 @@@ gw-state sm_id: 52 gw_handle_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467947439 037535 DEBUG   gateway__handle      src/gateway.c:1393 gateway handle
+LIBDQLITE[037511] 2023-11-28T18:40:15.467936092 037529 DEBUG   dqlite_node_stop     src/server.c:884 dqlite node stop
+LIBDQLITE[037511] 2023-11-28T18:40:15.467950300 037535 DEBUG   handle_describe      src/gateway.c:1363 handle describe
+LIBDQLITE[037511] 2023-11-28T18:40:15.467968650 037535 DEBUG   gateway_handle_cb    src/conn.c:80  @@@ gw-state sm_id: 52 gw_handle_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467971398 037535 DEBUG   gateway_handle_cb    src/conn.c:96  @@@ conn-state sm_id: 51 conn_write_started |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467986105 037535 DEBUG   conn_write_cb        src/conn.c:31  @@@ conn-state sm_id: 51 conn_write_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467989236 037535 DEBUG   conn_write_cb        src/conn.c:35  @@@ gw-state sm_id: 52 gw_resume |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467991612 037535 DEBUG   gateway__resume      src/gateway.c:1452 gateway resume - finished
+LIBDQLITE[037511] 2023-11-28T18:40:15.467993984 037535 DEBUG   conn_write_cb        src/conn.c:40  @@@ gw-state sm_id: 52 gw_resume_done |
+LIBDQLITE[037511] 2023-11-28T18:40:15.467996403 037535 DEBUG   read_message         src/conn.c:237 @@@ conn-state sm_id: 51 conn_msg_read |
+LIBDQLITE[037511] 2023-11-28T18:40:15.468006195 037535 DEBUG   conn__stop           src/conn.c:363 conn stop
+LIBDQLITE[037511] 2023-11-28T18:40:15.468008803 037535 DEBUG   conn__stop           src/conn.c:364 @@@ conn-state sm_id: 51 conn_stopped |
+LIBDQLITE[037511] 2023-11-28T18:40:15.468011057 037535 DEBUG   gateway__close       src/gateway.c:88  gateway close
+LIBDQLITE[037511] 2023-11-28T18:40:15.468098238 037535 DEBUG   impl_close           src/transport.c:208 impl close
+LIBDQLITE[037511] 2023-11-28T18:40:15.503646532 037529 DEBUG   fsm__close           src/fsm.c:743 fsm close
+LIBDQLITE[037511] 2023-11-28T18:40:15.503676790 037529 DEBUG   raftProxyClose       src/transport.c:262 raft proxy close
+LIBDQLITE[037511] 2023-11-28T18:40:15.503705789 037529 DEBUG   VfsClose             src/vfs.c:2092 vfs close

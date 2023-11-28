@@ -13,4 +13,6 @@
 
 #define DBG() fprintf(stderr, "%s:%d\n", __func__, __LINE__)
 
+uint64_t id_generate(void);
+
 #endif /* DQLITE_UTILS_H_ */

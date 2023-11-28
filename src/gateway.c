@@ -31,6 +31,8 @@ void gateway__init(struct gateway *g,
 	g->protocol = DQLITE_PROTOCOL_VERSION;
 	g->client_id = 0;
 	g->random_state = seed;
+	g->sm_id = id_generate();
+	oadd("gw-state sm_id: %lu gw_inited |", g->sm_id);
 }
 
 void gateway__leader_close(struct gateway *g, int reason)
@@ -88,6 +90,8 @@ void gateway__close(struct gateway *g)
 		stmt__registry_close(&g->stmts);
 		return;
 	}
+
+	oadd("gw-state sm_id: %lu gw_closed |", g->sm_id);
 
 	gateway__leader_close(g, RAFT_SHUTDOWN);
 }

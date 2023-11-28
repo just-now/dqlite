@@ -51,6 +51,7 @@ enum dqlite_trace_level {
 };
 
 #define tracef(...) tracef0(TRACE_DEBUG, __VA_ARGS__)
+#define oadd(...) tracef("@@@ " __VA_ARGS__)
 
 /* Enable tracing if the appropriate env variable is set, or disable tracing. */
 DQLITE_VISIBLE_TO_TESTS void dqliteTracingMaybeEnable(bool enabled);

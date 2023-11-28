@@ -36,6 +36,8 @@ struct conn
 	struct handle handle;
 	bool closed;
 	queue queue;
+
+	uint64_t sm_id;
 };
 
 /**

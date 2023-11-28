@@ -28,13 +28,16 @@ static void conn_write_cb(struct transport *transport, int status)
 		goto abort;
 	}
 
+	oadd("conn-state sm_id: %lu conn_write_done |", c->sm_id);
 	buffer__reset(&c->write);
 	buffer__advance(&c->write, message__sizeof(&c->response)); /* Header */
 
+	oadd("gw-state sm_id: %lu gw_resume |", c->gateway.sm_id);
 	rv = gateway__resume(&c->gateway, &finished);
 	if (rv != 0) {
 		goto abort;
 	}
+	oadd("gw-state sm_id: %lu gw_resume_done |", c->gateway.sm_id);
 	if (!finished) {
 		return;
 	}
@@ -74,6 +77,8 @@ static void gateway_handle_cb(struct handle *req,
 		goto abort;
 	}
 
+	oadd("gw-state sm_id: %lu gw_handle_done |", c->gateway.sm_id);
+
 	n = buffer__offset(&c->write) - message__sizeof(&c->response);
 	assert(n % 8 == 0);
 
@@ -88,6 +93,7 @@ static void gateway_handle_cb(struct handle *req,
 	buf.base = buffer__cursor(&c->write, 0);
 	buf.len = buffer__offset(&c->write);
 
+	oadd("conn-state sm_id: %lu conn_write_started |", c->sm_id);
 	rv = transport__write(&c->transport, &buf, conn_write_cb);
 	if (rv != 0) {
 		tracef("transport write failed %d", rv);
@@ -147,12 +153,16 @@ static void read_request_cb(struct transport *transport, int status)
 	buffer__reset(&c->write);
 	buffer__advance(&c->write, message__sizeof(&c->response)); /* Header */
 
+	oadd("conn-state sm_id: %lu conn_req_read_ok |", c->sm_id);
+
 	switch (c->request.type) {
 		case DQLITE_REQUEST_CONNECT:
 			raft_connect(c);
 			return;
 	}
 
+	oadd("conn-to-gw conn_id: %lu, gw_id: %lu |", c->sm_id, c->gateway.sm_id);
+	oadd("gw-state sm_id: %lu gw_handle_started |", c->gateway.sm_id);
 	rv = gateway__handle(&c->gateway, &c->handle, c->request.type,
 			     c->request.schema, &c->write, gateway_handle_cb);
 	if (rv != 0) {
@@ -177,6 +187,7 @@ static int read_request(struct conn *c)
 	if (c->request.words == 0) {
 		return 0;
 	}
+	oadd("conn-state sm_id: %lu conn_req_read |", c->sm_id);
 	rv = transport__read(&c->transport, &buf, read_request_cb);
 	if (rv != 0) {
 		tracef("transport read failed %d", rv);
@@ -203,6 +214,7 @@ static void read_message_cb(struct transport *transport, int status)
 
 	rv = message__decode(&cursor, &c->request);
 	assert(rv == 0); /* Can't fail, we know we have enough bytes */
+	oadd("conn-state sm_id: %lu conn_msg_read_ok |", c->sm_id);
 
 	rv = read_request(c);
 	if (rv != 0) {
@@ -222,6 +234,7 @@ static int read_message(struct conn *c)
 		tracef("init read failed %d", rv);
 		return rv;
 	}
+	oadd("conn-state sm_id: %lu conn_msg_read |", c->sm_id);
 	rv = transport__read(&c->transport, &buf, read_message_cb);
 	if (rv != 0) {
 		tracef("transport read failed %d", rv);
@@ -248,6 +261,7 @@ static void read_protocol_cb(struct transport *transport, int status)
 	rv = uint64__decode(&cursor, &c->protocol);
 	assert(rv == 0); /* Can't fail, we know we have enough bytes */
 
+	oadd("conn-state sm_id: %lu conn_proto_read_ok |", c->sm_id);
 	if (c->protocol != DQLITE_PROTOCOL_VERSION &&
 	    c->protocol != DQLITE_PROTOCOL_VERSION_LEGACY) {
 		/* errorf(c->logger, "unknown protocol version: %lx", */
@@ -258,6 +272,7 @@ static void read_protocol_cb(struct transport *transport, int status)
 		goto abort;
 	}
 	c->gateway.protocol = c->protocol;
+	oadd("conn-state sm_id: %lu conn_proto_check_ok |", c->sm_id);
 
 	rv = read_message(c);
 	if (rv != 0) {
@@ -279,6 +294,8 @@ static int read_protocol(struct conn *c)
 		tracef("init read failed %d", rv);
 		return rv;
 	}
+
+	oadd("conn-state sm_id: %lu conn_proto_read |", c->sm_id);
 	rv = transport__read(&c->transport, &buf, read_protocol_cb);
 	if (rv != 0) {
 		tracef("transport read failed %d", rv);
@@ -300,6 +317,10 @@ int conn__start(struct conn *c,
 	int rv;
 	(void)loop;
 	tracef("conn start");
+
+	c->sm_id = id_generate();
+	oadd("conn-state sm_id: %lu conn_started |", c->sm_id);
+
 	rv = transport__init(&c->transport, stream);
 	if (rv != 0) {
 		tracef("conn start - transport init failed %d", rv);
@@ -340,6 +361,7 @@ err:
 void conn__stop(struct conn *c)
 {
 	tracef("conn stop");
+	oadd("conn-state sm_id: %lu conn_stopped |", c->sm_id);
 	if (c->closed) {
 		return;
 	}
