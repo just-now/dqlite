@@ -108,6 +108,8 @@ struct handle
 	/* Callback that will be invoked at the end of request processing to
 	 * write the response. */
 	handle_cb cb;
+	/* ... */
+	uint64_t sm_id;
 };
 
 /**

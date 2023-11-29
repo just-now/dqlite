@@ -86,12 +86,12 @@ void gateway__leader_close(struct gateway *g, int reason)
 void gateway__close(struct gateway *g)
 {
 	tracef("gateway close");
+	oadd("gw-state sm_id: %lu gw_closed |", g->sm_id);
+
 	if (g->leader == NULL) {
 		stmt__registry_close(&g->stmts);
 		return;
 	}
-
-	oadd("gw-state sm_id: %lu gw_closed |", g->sm_id);
 
 	gateway__leader_close(g, RAFT_SHUTDOWN);
 }
@@ -193,6 +193,8 @@ static void failure(struct handle *req, int code, const char *message)
 	 * than that. So this can't fail. */
 	assert(cursor != NULL);
 	response_failure__encode(&failure, &cursor);
+
+	oadd("req-state sm_id: %lu failure |", req->sm_id);
 	req->cb(req, 0, DQLITE_RESPONSE_FAILURE, 0);
 }
 
@@ -211,6 +213,8 @@ static void emptyRows(struct handle *req)
 static int handle_leader_legacy(struct gateway *g, struct handle *req)
 {
 	tracef("handle leader legacy");
+	oadd("req-state sm_id: %lu handle_legacy |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	START_V0(leader, server_legacy);
 	raft_id id;
@@ -225,6 +229,8 @@ static int handle_leader_legacy(struct gateway *g, struct handle *req)
 static int handle_leader(struct gateway *g, struct handle *req)
 {
 	tracef("handle leader");
+	oadd("req-state sm_id: %lu handle_leader |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	raft_id id = 0;
 	const char *address = NULL;
@@ -256,6 +262,8 @@ static int handle_leader(struct gateway *g, struct handle *req)
 static int handle_client(struct gateway *g, struct handle *req)
 {
 	tracef("handle client");
+	oadd("req-state sm_id: %lu handle_client |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	START_V0(client, welcome);
 	g->client_id = request.id;
@@ -267,6 +275,8 @@ static int handle_client(struct gateway *g, struct handle *req)
 static int handle_open(struct gateway *g, struct handle *req)
 {
 	tracef("handle open");
+	oadd("req-state sm_id: %lu handle_open |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct db *db;
 	int rc;
@@ -313,6 +323,8 @@ static void prepareBarrierCb(struct barrier *barrier, int status)
 	int rc;
 
 	assert(req != NULL);
+	oadd("req-state sm_id: %lu prepareBarrierCb |", req->sm_id);
+
 	stmt = stmt__registry_get(&g->stmts, req->stmt_id);
 	assert(stmt != NULL);
 	g->req = NULL;
@@ -374,6 +386,8 @@ static void prepareBarrierCb(struct barrier *barrier, int status)
 static int handle_prepare(struct gateway *g, struct handle *req)
 {
 	tracef("handle prepare");
+	oadd("req-state sm_id: %lu handle_prepare |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct stmt *stmt;
 	struct request_prepare request = {0};
@@ -464,6 +478,8 @@ static void leader_exec_cb(struct exec *exec, int status)
 static int handle_exec(struct gateway *g, struct handle *req)
 {
 	tracef("handle exec schema:%" PRIu8, req->schema);
+	oadd("req-state sm_id: %lu handle_exec |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct stmt *stmt;
 	struct request_exec request = {0};
@@ -558,6 +574,8 @@ static void query_barrier_cb(struct barrier *barrier, int status)
 	struct gateway *g = barrier->data;
 	struct handle *req = g->req;
 	assert(req != NULL);
+	oadd("req-state sm_id: %lu query_barrier |", req->sm_id);
+
 	g->req = NULL;
 	struct stmt *stmt = stmt__registry_get(&g->stmts, req->stmt_id);
 	assert(stmt != NULL);
@@ -593,6 +611,8 @@ static void leaderModifyingQueryCb(struct exec *exec, int status)
 static int handle_query(struct gateway *g, struct handle *req)
 {
 	tracef("handle query schema:%" PRIu8, req->schema);
+	oadd("req-state sm_id: %lu handle_query |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct stmt *stmt;
 	struct request_query request = {0};
@@ -652,6 +672,8 @@ static int handle_query(struct gateway *g, struct handle *req)
 static int handle_finalize(struct gateway *g, struct handle *req)
 {
 	tracef("handle finalize");
+	oadd("req-state sm_id: %lu handle_finalize |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct stmt *stmt;
 	int rv;
@@ -675,6 +697,7 @@ static void handle_exec_sql_next(struct gateway *g,
 static void handle_exec_sql_cb(struct exec *exec, int status)
 {
 	tracef("handle exec sql cb status %d", status);
+
 	struct gateway *g = exec->data;
 	struct handle *req = g->req;
 
@@ -695,6 +718,8 @@ static void handle_exec_sql_next(struct gateway *g,
 				 bool done)
 {
 	tracef("handle exec sql next");
+	oadd("req-state sm_id: %lu handle_exec_sql_next |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct response_result response = {0};
 	sqlite3_stmt *stmt = NULL;
@@ -771,6 +796,8 @@ static void execSqlBarrierCb(struct barrier *barrier, int status)
 	struct gateway *g = barrier->data;
 	struct handle *req = g->req;
 	assert(req != NULL);
+	oadd("req-state sm_id: %lu execSqlBarrier |", req->sm_id);
+
 	g->req = NULL;
 
 	if (status != 0) {
@@ -784,6 +811,8 @@ static void execSqlBarrierCb(struct barrier *barrier, int status)
 static int handle_exec_sql(struct gateway *g, struct handle *req)
 {
 	tracef("handle exec sql schema:%" PRIu8, req->schema);
+	oadd("req-state sm_id: %lu handle_exec_sql |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct request_exec_sql request = {0};
 	int rc;
@@ -842,6 +871,8 @@ static void querySqlBarrierCb(struct barrier *barrier, int status)
 	struct gateway *g = barrier->data;
 	struct handle *req = g->req;
 	assert(req != NULL);
+	oadd("req-state sm_id: %lu querySqlBarrierCb |", req->sm_id);
+
 	g->req = NULL;
 	struct cursor *cursor = &req->cursor;
 	const char *sql = req->sql;
@@ -919,6 +950,8 @@ static void querySqlBarrierCb(struct barrier *barrier, int status)
 static int handle_query_sql(struct gateway *g, struct handle *req)
 {
 	tracef("handle query sql schema:%" PRIu8, req->schema);
+	oadd("req-state sm_id: %lu handle_query_sql |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct request_query_sql request = {0};
 	int rv;
@@ -955,6 +988,8 @@ static int handle_query_sql(struct gateway *g, struct handle *req)
 static int handle_interrupt(struct gateway *g, struct handle *req)
 {
 	tracef("handle interrupt");
+	oadd("req-state sm_id: %lu handle_interrupt |", req->sm_id);
+
 	g->req = NULL;
 	struct cursor *cursor = &req->cursor;
 	START_V0(interrupt, empty);
@@ -979,6 +1014,8 @@ static void raftChangeCb(struct raft_change *change, int status)
 	struct handle *req = g->req;
 	struct response_empty response = {0};
 	g->req = NULL;
+
+	oadd("req-state sm_id: %lu raftChangeCb |", req->sm_id);
 	sqlite3_free(r);
 	if (status != 0) {
 		failure(req, translateRaftErrCode(status),
@@ -991,6 +1028,8 @@ static void raftChangeCb(struct raft_change *change, int status)
 static int handle_add(struct gateway *g, struct handle *req)
 {
 	tracef("handle add");
+	oadd("req-state sm_id: %lu handle_add |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct change *r;
 	uint64_t req_id;
@@ -1026,6 +1065,8 @@ static int handle_add(struct gateway *g, struct handle *req)
 static int handle_promote_or_assign(struct gateway *g, struct handle *req)
 {
 	tracef("handle assign");
+	oadd("req-state sm_id: %lu handle_assign |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct change *r;
 	uint64_t role = DQLITE_VOTER;
@@ -1073,6 +1114,8 @@ static int handle_promote_or_assign(struct gateway *g, struct handle *req)
 static int handle_remove(struct gateway *g, struct handle *req)
 {
 	tracef("handle remove");
+	oadd("req-state sm_id: %lu handle_remove |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct change *r;
 	uint64_t req_id;
@@ -1146,6 +1189,8 @@ oom:
 static int handle_dump(struct gateway *g, struct handle *req)
 {
 	tracef("handle dump");
+	oadd("req-state sm_id: %lu handle_dump |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	bool err = true;
 	sqlite3_vfs *vfs;
@@ -1280,6 +1325,8 @@ static int encodeServer(struct gateway *g,
 static int handle_cluster(struct gateway *g, struct handle *req)
 {
 	tracef("handle cluster");
+	oadd("req-state sm_id: %lu handle_cluster |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	unsigned i;
 	void *cur;
@@ -1318,6 +1365,8 @@ void raftTransferCb(struct raft_transfer *r)
 	struct handle *req = g->req;
 	struct response_empty response = {0};
 	g->req = NULL;
+
+	oadd("req-state sm_id: %lu raftTransferCb |", req->sm_id);
 	sqlite3_free(r);
 	if (g->raft->state == RAFT_LEADER) {
 		tracef("transfer failed");
@@ -1330,6 +1379,8 @@ void raftTransferCb(struct raft_transfer *r)
 static int handle_transfer(struct gateway *g, struct handle *req)
 {
 	tracef("handle transfer");
+	oadd("req-state sm_id: %lu handle_transfer |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	struct raft_transfer *r;
 	int rv;
@@ -1361,6 +1412,8 @@ static int handle_transfer(struct gateway *g, struct handle *req)
 static int handle_describe(struct gateway *g, struct handle *req)
 {
 	tracef("handle describe");
+	oadd("req-state sm_id: %lu handle_describe |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	START_V0(describe, metadata);
 	if (request.format != DQLITE_REQUEST_DESCRIBE_FORMAT_V0) {
@@ -1376,6 +1429,8 @@ static int handle_describe(struct gateway *g, struct handle *req)
 static int handle_weight(struct gateway *g, struct handle *req)
 {
 	tracef("handle weight");
+	oadd("req-state sm_id: %lu handle_weight |", req->sm_id);
+
 	struct cursor *cursor = &req->cursor;
 	START_V0(weight, empty);
 	g->config->weight = request.weight;
@@ -1429,6 +1484,10 @@ handle:
 	req->sql = NULL;
 	req->stmt = stmt;
 	req->exec_count = 0;
+	req->sm_id = id_generate();
+
+	oadd("req-state sm_id: %lu req_inited |", req->sm_id);
+	oadd("gw-to-req gw_id: %lu, req_id: %lu |", g->sm_id, req->sm_id);
 
 	switch (type) {
 #define DISPATCH(LOWER, UPPER, _)            \
