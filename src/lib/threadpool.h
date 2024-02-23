@@ -74,6 +74,8 @@ struct pool_s
 
 enum {
 	POOL_QOS_PRIO_FAIR = 2,
+	POOL_TOP_HALF,
+	POOL_BOTTOM_HALF,
 };
 
 int pool_init(pool_t *pool,

@@ -477,6 +477,7 @@ void pool_queue_work(pool_t *pool,
 		     void (*work_cb)(pool_work_t *w),
 		     void (*after_work_cb)(pool_work_t *w))
 {
+	PRE(memcmp(w, &(pool_work_t){}, sizeof *w) == 0);
 	PRE(work_cb != NULL && type < WT_NR);
 
 	*w = (pool_work_t){

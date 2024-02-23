@@ -26,3 +26,8 @@ dqlite.pc
 libtool
 stamp-h*
 sqlite3.c
+.cache
+GPATH
+GRTAGS
+GTAGS
+compile_commands.json

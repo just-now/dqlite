@@ -57,7 +57,7 @@ static void connCloseCb(struct conn *conn)
 	munit_assert_int(rv, ==, 0);                                   \
 	f->closed = false;                                             \
 	f->conn.queue[0] = &f->closed;                                 \
-	rv = conn__start(&f->conn, &f->config, &f->loop, &f->registry, \
+	rv = conn__start(&f->conn, &f->config, &f->pool, &f->registry, \
 			 &f->raft, stream, &f->raft_transport, seed,   \
 			 connCloseCb);                                 \
 	munit_assert_int(rv, ==, 0)

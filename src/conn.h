@@ -35,6 +35,7 @@ struct conn
 	struct handle handle;
 	bool closed;
 	queue queue;
+	pool_t *pool;
 };
 
 /**
@@ -45,7 +46,7 @@ struct conn
  */
 int conn__start(struct conn *c,
 		struct config *config,
-		struct uv_loop_s *loop,
+		struct pool_s *pool,
 		struct registry *registry,
 		struct raft *raft,
 		struct uv_stream_s *stream,
