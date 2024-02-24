@@ -25,7 +25,6 @@ integration-test
 dqlite.pc
 libtool
 stamp-h*
-sqlite3.c
 .cache
 GPATH
 GRTAGS

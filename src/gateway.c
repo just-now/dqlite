@@ -548,6 +548,28 @@ done:
 	}
 }
 
+// static void qb_top(pool_work_t *w)
+// {
+// 	struct exec *req = CONTAINER_OF(w, struct exec, work);
+//
+// }
+//
+// static void qb_bottom(pool_work_t *w)
+// {
+// 	struct exec *req = CONTAINER_OF(w, struct exec, work);
+//
+// }
+//
+// static void query_batch(struct gateway *g)
+// {
+//     	struct conn *c = CONTAINER_OF(g, struct conn, gateway);
+//     	struct handle *req = g->req;
+// 	assert(req != NULL);
+// 	g->req = NULL;
+// 	pool_queue_work(c->pool, &req->work, 0xbad00b01, WT_UNORD,
+// 			qb_top, qb_bottom);
+// }
+
 static void query_barrier_cb(struct barrier *barrier, int status)
 {
 	tracef("query barrier cb status:%d", status);

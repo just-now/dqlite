@@ -200,18 +200,17 @@ static bool planner_invariant(const struct sm *m, int prev_state)
 	queue *u = &pi->unordered;
 
 	return ERGO(sm_state(m) == PS_NOTHING, empty(o) && empty(u)) &&
-	       ERGO(sm_state(m) == PS_DRAINING,
-		    ERGO(prev_state == PS_BARRIER,
-			 pi->ord_in_flight == 0 && empty(u)) &&
-			ERGO(prev_state == PS_NOTHING,
-			     !empty(u) || !empty(o))) &&
-	       ERGO(sm_state(m) == PS_EXITED,
-		    pi->exiting && empty(o) && empty(u)) &&
-	       ERGO(
-		   sm_state(m) == PS_BARRIER,
-		   ERGO(prev_state == PS_DRAINING, q_type(head(o)) == WT_BAR) &&
-		       ERGO(prev_state == PS_DRAINING_UNORD, empty(u))) &&
-	       ERGO(sm_state(m) == PS_DRAINING_UNORD, !empty(u));
+	    ERGO(sm_state(m) == PS_DRAINING,
+		 ERGO(prev_state == PS_BARRIER,
+		      pi->ord_in_flight == 0 && empty(u)) &&
+		 ERGO(prev_state == PS_NOTHING,
+		      !empty(u) || !empty(o))) &&
+	    ERGO(sm_state(m) == PS_EXITED,
+		 pi->exiting && empty(o) && empty(u)) &&
+	    ERGO(sm_state(m) == PS_BARRIER,
+		 ERGO(prev_state == PS_DRAINING, q_type(head(o)) == WT_BAR) &&
+		 ERGO(prev_state == PS_DRAINING_UNORD, empty(u))) &&
+	    ERGO(sm_state(m) == PS_DRAINING_UNORD, !empty(u));
 }
 
 static void planner(void *arg)
@@ -237,7 +236,8 @@ static void planner(void *arg)
 					uv_cond_wait(&pi->planner_cond, mutex);
 				}
 				sm_move(planner_sm,
-					pi->exiting ? PS_EXITED : PS_DRAINING);
+					pi->exiting && empty(o) && empty(u)
+					? PS_EXITED : PS_DRAINING);
 				break;
 			case PS_DRAINING:
 				while (!(empty(o) && empty(u))) {

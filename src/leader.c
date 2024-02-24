@@ -406,13 +406,13 @@ finish:
 	leaderExecDone(l->exec);
 }
 
-static void b_cb(pool_work_t *w)
+static void top(pool_work_t *w)
 {
 	struct exec *req = CONTAINER_OF(w, struct exec, work);
 	leaderExecV2(req, POOL_TOP_HALF);
 }
 
-static void b_after_cb(pool_work_t *w)
+static void bottom(pool_work_t *w)
 {
 	struct exec *req = CONTAINER_OF(w, struct exec, work);
 	leaderExecV2(req, POOL_BOTTOM_HALF);
@@ -433,9 +433,8 @@ static void execBarrierCb(struct barrier *barrier, int status)
 		leaderExecDone(l->exec);
 		return;
 	}
-	// leaderExecV2(req);
-	pool_queue_work(c->pool, &req->work, 0xbad00b01, WT_UNORD,
-			b_cb, b_after_cb);
+
+	pool_queue_work(c->pool, &req->work, 0xbad00b01, WT_UNORD, top, bottom);
 }
 
 int leader__exec(struct leader *l,

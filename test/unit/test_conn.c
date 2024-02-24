@@ -50,6 +50,8 @@ static void connCloseCb(struct conn *conn)
 	SETUP_CONFIG;                                                  \
 	SETUP_REGISTRY;                                                \
 	SETUP_RAFT;                                                    \
+	rv = pool_init(&f->pool, &f->loop, 4, POOL_QOS_PRIO_FAIR);     \
+	munit_assert_int(rv, ==, 0);				       \
 	SETUP_CLIENT;                                                  \
 	RAFT_BOOTSTRAP;                                                \
 	RAFT_START;                                                    \
@@ -63,6 +65,8 @@ static void connCloseCb(struct conn *conn)
 	munit_assert_int(rv, ==, 0)
 
 #define TEAR_DOWN                         \
+	pool_close(&f->pool);	          \
+	pool_fini(&f->pool);	          \
 	conn__stop(&f->conn);             \
 	while (!f->closed) {              \
 		test_uv_run(&f->loop, 1); \

@@ -40,14 +40,10 @@
 		munit_assert_int(rv2, ==, 0);                            \
 		rv2 = raft_init(&f->raft, &f->raft_io, &f->fsm, 1, "1"); \
 		munit_assert_int(rv2, ==, 0);                            \
-		rv2 = pool_init(&f->pool, &f->loop, 4, POOL_QOS_PRIO_FAIR);		\
-		munit_assert_int(rv2, ==, 0);                            \
 	}
 
 #define TEAR_DOWN_RAFT                              \
 	{                                           \
-		pool_close(&f->pool);		    \
-		pool_fini(&f->pool);		    \
 		raft_close(&f->raft, NULL);         \
 		test_uv_stop(&f->loop);             \
 		raft_uv_close(&f->raft_io);         \
