@@ -19,6 +19,8 @@ TEST_MODULE(replication_v1);
 
 #define SETUP                             \
 	unsigned i;                       \
+	pool_ut_fallback()->flags |=	  \
+	    POOL_FOR_UT_NOT_ASYNC;	  \
 	SETUP_CLUSTER(V2)                 \
 	for (i = 0; i < N_SERVERS; i++) { \
 		SETUP_LEADER(i);          \
@@ -325,6 +327,7 @@ struct fixture
 static void *setUp(const MunitParameter params[], void *user_data)
 {
 	struct fixture *f = munit_malloc(sizeof *f);
+	pool_ut_fallback()->flags |= POOL_FOR_UT_NOT_ASYNC;
 	SETUP_CLUSTER(V2);
 	SETUP_LEADER(0);
 	f->req.data = f;
