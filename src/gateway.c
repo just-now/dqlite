@@ -12,6 +12,7 @@
 #include "tuple.h"
 #include "vfs.h"
 #include "conn.h"
+#include "server.h"
 
 void gateway__init(struct gateway *g,
 		   struct config *config,
@@ -570,14 +571,14 @@ static void qb_bottom(pool_work_t *w)
 
 static void query_batch(struct gateway *g)
 {
+    	struct dqlite_node *node = g->raft->data;
     	struct handle *req = g->req;
 	assert(req != NULL);
 	g->req = NULL;
 	req->gw = g;
 
-	pool_queue_work(pool_ut_fallback(), &req->work,
-			0xbad00b01, WT_UNORD,
-			qb_top, qb_bottom);
+	pool_queue_work(node == NULL ? pool_ut_fallback() : &node->pool,
+			&req->work, 0xbad00b01, WT_UNORD, qb_top, qb_bottom);
 }
 
 static void query_barrier_cb(struct barrier *barrier, int status)
@@ -1457,6 +1458,7 @@ handle:
 	req->sql = NULL;
 	req->stmt = stmt;
 	req->exec_count = 0;
+	req->work = (pool_work_t){};
 
 	switch (type) {
 #define DISPATCH(LOWER, UPPER, _)            \
@@ -1483,6 +1485,11 @@ int gateway__resume(struct gateway *g, bool *finished)
 	}
 	tracef("gateway resume - not finished");
 	*finished = false;
+
+	/* TODO: not sure it's 100% correct to resume the processing within the
+	 * same thread pool. */
+	g->req->work = (pool_work_t){};
+
 	query_batch(g);
 	return 0;
 }

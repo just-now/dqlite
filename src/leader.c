@@ -13,6 +13,7 @@
 #include "tracing.h"
 #include "utils.h"
 #include "vfs.h"
+#include "server.h"
 
 /* Called when a leader exec request terminates and the associated callback can
  * be invoked. */
@@ -423,6 +424,7 @@ static void execBarrierCb(struct barrier *barrier, int status)
 	tracef("exec barrier cb status %d", status);
 	struct exec *req = barrier->data;
 	struct leader *l = req->leader;
+	struct dqlite_node *node = l->raft->data;
 
 	if (status != 0) {
 		l->exec->status = status;
@@ -430,8 +432,8 @@ static void execBarrierCb(struct barrier *barrier, int status)
 		return;
 	}
 
-	pool_queue_work(pool_ut_fallback(), &req->work,
-			0xbad00b01, WT_UNORD, top, bottom);
+	pool_queue_work(node == NULL ? pool_ut_fallback() : &node->pool,
+			&req->work, 0xbad00b01, WT_UNORD, top, bottom);
 }
 
 int leader__exec(struct leader *l,

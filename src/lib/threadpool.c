@@ -122,6 +122,11 @@ struct pool_impl {
 	uint32_t qos_prio;      /* QoS prio */
 };
 
+static inline bool pool_is_inited(const pool_t *pool)
+{
+	return pool->pi != NULL;
+}
+
 static inline bool has_active_ws(pool_t *pool)
 {
 	return pool->pi->active_ws > 0;
@@ -486,6 +491,7 @@ void pool_queue_work(pool_t *pool,
 		return;
 	}
 
+	PRE(pool_is_inited(pool));
 	*w = (pool_work_t){
 		.pool = pool,
 		.type = type,
