@@ -6,10 +6,12 @@
 #include "query.h"
 #include "request.h"
 #include "response.h"
+#include "src/lib/threadpool.h"
 #include "tracing.h"
 #include "translate.h"
 #include "tuple.h"
 #include "vfs.h"
+#include "conn.h"
 
 void gateway__init(struct gateway *g,
 		   struct config *config,
@@ -514,17 +516,23 @@ static int handle_exec(struct gateway *g, struct handle *req)
  * given request with a single batch of rows.
  *
  * A single batch of rows is typically about the size of a memory page. */
-static void query_batch(struct gateway *g)
+static void query_batch2(struct handle *req, int half)
 {
-	struct handle *req = g->req;
-	assert(req != NULL);
-	g->req = NULL;
+	struct gateway *g = req->gw;
+	//struct handle *req = g->req;
+	//assert(req != NULL);
+	//g->req = NULL;
 	sqlite3_stmt *stmt = req->stmt;
 	assert(stmt != NULL);
 	struct response_rows response;
 	int rc;
 
-	rc = query__batch(stmt, req->buffer);
+	if (half == POOL_TOP_HALF) {
+		req->rc = query__batch(stmt, req->buffer);
+		return;
+	} // else POOL_TOP_HALF =>
+
+	rc = req->rc;
 	if (rc != SQLITE_ROW && rc != SQLITE_DONE) {
 		assert(g->leader != NULL);
 		failure(req, rc, sqlite3_errmsg(g->leader->conn));
@@ -548,27 +556,29 @@ done:
 	}
 }
 
-// static void qb_top(pool_work_t *w)
-// {
-// 	struct exec *req = CONTAINER_OF(w, struct exec, work);
-//
-// }
-//
-// static void qb_bottom(pool_work_t *w)
-// {
-// 	struct exec *req = CONTAINER_OF(w, struct exec, work);
-//
-// }
-//
-// static void query_batch(struct gateway *g)
-// {
-//     	struct conn *c = CONTAINER_OF(g, struct conn, gateway);
-//     	struct handle *req = g->req;
-// 	assert(req != NULL);
-// 	g->req = NULL;
-// 	pool_queue_work(c->pool, &req->work, 0xbad00b01, WT_UNORD,
-// 			qb_top, qb_bottom);
-// }
+static void qb_top(pool_work_t *w)
+{
+	struct handle *req = CONTAINER_OF(w, struct handle, work);
+	query_batch2(req, POOL_TOP_HALF);
+}
+
+static void qb_bottom(pool_work_t *w)
+{
+	struct handle *req = CONTAINER_OF(w, struct handle, work);
+	query_batch2(req, POOL_BOTTOM_HALF);
+}
+
+static void query_batch(struct gateway *g)
+{
+    	struct handle *req = g->req;
+	assert(req != NULL);
+	g->req = NULL;
+	req->gw = g;
+
+	pool_queue_work(pool_ut_fallback(), &req->work,
+			0xbad00b01, WT_UNORD,
+			qb_top, qb_bottom);
+}
 
 static void query_barrier_cb(struct barrier *barrier, int status)
 {

@@ -1,4 +1,5 @@
 #include "conn.h"
+#include <uv.h>
 #include "message.h"
 #include "protocol.h"
 #include "request.h"
@@ -289,7 +290,7 @@ static int read_protocol(struct conn *c)
 
 int conn__start(struct conn *c,
 		struct config *config,
-		struct pool_s *pool,
+		struct uv_loop_s *loop,
 		struct registry *registry,
 		struct raft *raft,
 		struct uv_stream_s *stream,
@@ -298,7 +299,7 @@ int conn__start(struct conn *c,
 		conn_close_cb close_cb)
 {
 	int rv;
-	c->pool = pool;
+	(void) loop;
 	tracef("conn start");
 	rv = transport__init(&c->transport, stream);
 	if (rv != 0) {

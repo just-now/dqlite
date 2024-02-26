@@ -480,6 +480,12 @@ void pool_queue_work(pool_t *pool,
 	PRE(memcmp(w, &(pool_work_t){}, sizeof *w) == 0);
 	PRE(work_cb != NULL && type < WT_NR);
 
+	if (!!(pool->flags & POOL_FOR_UT_NOT_ASYNC)) {
+		work_cb(w);
+		after_work_cb(w);
+		return;
+	}
+
 	*w = (pool_work_t){
 		.pool = pool,
 		.type = type,
@@ -487,6 +493,7 @@ void pool_queue_work(pool_t *pool,
 		.work_cb = work_cb,
 		.after_work_cb = after_work_cb,
 	};
+
 	w_register(pool, w);
 	pool_work_submit(pool, w);
 }
@@ -501,6 +508,7 @@ int pool_init(pool_t *pool,
 
 	PRE(threads_nr <= THREADPOOL_SIZE_MAX);
 
+	pool->flags = 0x0;
 	pi = pool->pi = calloc(1, sizeof(*pool->pi));
 	if (pi == NULL) {
 		return UV_ENOMEM;
@@ -542,7 +550,8 @@ void pool_fini(pool_t *pool)
 	pool_cleanup(pool);
 
 	uv_mutex_lock(&pi->outq_mutex);
-	POST(empty(&pi->outq) && !has_active_ws(pool));
+	POST(!!(pool->flags & POOL_FOR_UT_NON_CLEAN_FINI) ||
+	     (empty(&pi->outq) && !has_active_ws(pool)));
 	uv_mutex_unlock(&pi->outq_mutex);
 
 	uv_mutex_destroy(&pi->outq_mutex);
@@ -552,4 +561,10 @@ void pool_fini(pool_t *pool)
 void pool_close(pool_t *pool)
 {
 	uv_close((uv_handle_t *)&pool->pi->outq_async, NULL);
+}
+
+pool_t *pool_ut_fallback(void)
+{
+	static pool_t pool;
+	return &pool;
 }

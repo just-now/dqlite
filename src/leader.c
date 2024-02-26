@@ -424,17 +424,14 @@ static void execBarrierCb(struct barrier *barrier, int status)
 	struct exec *req = barrier->data;
 	struct leader *l = req->leader;
 
-	/* TP_TODO! Ugly! */
-	struct gateway *g = CONTAINER_OF(req, struct gateway, exec);
-	struct conn *c = CONTAINER_OF(g, struct conn, gateway);
-
 	if (status != 0) {
 		l->exec->status = status;
 		leaderExecDone(l->exec);
 		return;
 	}
 
-	pool_queue_work(c->pool, &req->work, 0xbad00b01, WT_UNORD, top, bottom);
+	pool_queue_work(pool_ut_fallback(), &req->work,
+			0xbad00b01, WT_UNORD, top, bottom);
 }
 
 int leader__exec(struct leader *l,

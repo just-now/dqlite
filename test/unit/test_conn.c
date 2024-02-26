@@ -14,6 +14,7 @@
 #include "../../src/lib/transport.h"
 #include "../../src/raft.h"
 #include "../../src/transport.h"
+#include "src/lib/threadpool.h"
 
 TEST_MODULE(conn);
 
@@ -50,7 +51,8 @@ static void connCloseCb(struct conn *conn)
 	SETUP_CONFIG;                                                  \
 	SETUP_REGISTRY;                                                \
 	SETUP_RAFT;                                                    \
-	rv = pool_init(&f->pool, &f->loop, 4, POOL_QOS_PRIO_FAIR);     \
+	rv = pool_init(pool_ut_fallback(),			       \
+		       &f->loop, 4, POOL_QOS_PRIO_FAIR);	       \
 	munit_assert_int(rv, ==, 0);				       \
 	SETUP_CLIENT;                                                  \
 	RAFT_BOOTSTRAP;                                                \
@@ -59,14 +61,14 @@ static void connCloseCb(struct conn *conn)
 	munit_assert_int(rv, ==, 0);                                   \
 	f->closed = false;                                             \
 	f->conn.queue[0] = &f->closed;                                 \
-	rv = conn__start(&f->conn, &f->config, &f->pool, &f->registry, \
+	rv = conn__start(&f->conn, &f->config, &f->loop, &f->registry, \
 			 &f->raft, stream, &f->raft_transport, seed,   \
 			 connCloseCb);                                 \
 	munit_assert_int(rv, ==, 0)
 
 #define TEAR_DOWN                         \
-	pool_close(&f->pool);	          \
-	pool_fini(&f->pool);	          \
+	pool_close(pool_ut_fallback());	          \
+	pool_fini(pool_ut_fallback());	          \
 	conn__stop(&f->conn);             \
 	while (!f->closed) {              \
 		test_uv_run(&f->loop, 1); \
@@ -350,6 +352,9 @@ TEST_CASE(exec, close_while_in_flight, NULL)
 	munit_assert_int(rv, ==, 0);
 
 	test_uv_run(&f->loop, 1);
+
+	/* TODO: This needs an additional long comment. */
+	pool_ut_fallback()->flags |= POOL_FOR_UT_NON_CLEAN_FINI;
 
 	return MUNIT_OK;
 }

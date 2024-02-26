@@ -20,7 +20,6 @@
 #define FIXTURE_RAFT                             \
 	char *dir;                               \
 	struct uv_loop_s loop;                   \
-	struct pool_s pool;                      \
 	struct raft_uv_transport raft_transport; \
 	struct raft_io raft_io;                  \
 	struct raft_fsm fsm;                     \
