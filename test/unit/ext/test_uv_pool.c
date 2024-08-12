@@ -17,6 +17,8 @@ struct fixture {
 	pool_work_t w;
 	uv_loop_t loop;
 	pool_t pool;
+	uv_idle_t idler;
+	uv_sem_t sem;
 };
 
 static void loop_setup(struct fixture *f)
@@ -83,6 +85,7 @@ static void threadpool_tear_down(void *data)
 	pool_fini(&f->pool);
 	rc = uv_loop_close(&f->loop);
 	munit_assert_int(rc, ==, 0);
+	uv_sem_destroy(&f->sem);
 	free(f);
 }
 
@@ -105,6 +108,50 @@ TEST_CASE(threadpool, sync, NULL)
 	int rc;
 
 	pool_queue_work(&f->pool, &f->w, 0, WT_UNORD, work_cb, after_work_cb);
+
+	rc = uv_run(&f->loop, UV_RUN_DEFAULT);
+	munit_assert_int(rc, ==, 0);
+
+	return MUNIT_OK;
+}
+
+// --------------------------------------------------------------------------------
+
+static void after_sem_cb(pool_work_t *w)
+{
+	pool_close(w->pool);
+}
+
+static void sem_cb(pool_work_t *w)
+{
+	struct fixture *f = CONTAINER_OF(w->pool, struct fixture, pool);
+	printf("in  sem_cb = %p\n", w);
+	uv_sem_post(&f->sem);
+	printf("out sem_cb = %p\n", w);
+}
+
+static void idler_wait(uv_idle_t* handle)
+{
+	struct fixture *f = CONTAINER_OF(handle, struct fixture, idler);
+	printf("in idle = %p\n", f);
+        uv_idle_stop(handle);
+	uv_close((uv_handle_t *) handle, NULL);
+	pool_queue_work(&f->pool, &f->w, 0, WT_UNORD, sem_cb, after_sem_cb);
+	uv_sem_wait(&f->sem);
+	printf("out idle\n");
+}
+
+
+TEST_CASE(threadpool, sem, NULL)
+{
+	(void)params;
+	struct fixture *f = data;
+	int rc;
+
+	printf("\n\n");
+	uv_sem_init(&f->sem, 0);
+	uv_idle_init(&f->loop, &f->idler);
+	uv_idle_start(&f->idler, idler_wait);
 
 	rc = uv_run(&f->loop, UV_RUN_DEFAULT);
 	munit_assert_int(rc, ==, 0);
