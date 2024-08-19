@@ -125,20 +125,20 @@ static void after_sem_cb(pool_work_t *w)
 static void sem_cb(pool_work_t *w)
 {
 	struct fixture *f = CONTAINER_OF(w->pool, struct fixture, pool);
-	printf("in  sem_cb = %p\n", w);
+	printf("> sem_cb = %p\n", w);
 	uv_sem_post(&f->sem);
-	printf("out sem_cb = %p\n", w);
+	printf("< sem_cb = %p\n", w);
 }
 
 static void idler_wait(uv_idle_t* handle)
 {
 	struct fixture *f = CONTAINER_OF(handle, struct fixture, idler);
-	printf("in idle = %p\n", f);
+	printf("> idle = %p\n", f);
         uv_idle_stop(handle);
 	uv_close((uv_handle_t *) handle, NULL);
 	pool_queue_work(&f->pool, &f->w, 0, WT_UNORD, sem_cb, after_sem_cb);
 	uv_sem_wait(&f->sem);
-	printf("out idle\n");
+	printf("< idle\n");
 }
 
 

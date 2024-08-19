@@ -47,6 +47,7 @@ basic_dqlite_sources = \
   src/lib/buffer.c \
   src/lib/fs.c \
   src/lib/sm.c \
+  src/lib/coro.c \
   src/lib/threadpool.c \
   src/lib/transport.c \
   src/logger.c \

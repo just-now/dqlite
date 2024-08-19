@@ -19,6 +19,7 @@
 #include "replication.h"
 #include "request.h"
 #include "snapshot.h"
+#include "../lib/coro.h"
 
 #ifndef max
 #define max(a, b) ((a) < (b) ? (b) : (a))
