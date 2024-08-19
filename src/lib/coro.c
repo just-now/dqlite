@@ -33,8 +33,11 @@ static void *alloc_aligned(size_t size, size_t alignment)
 	void *result;
 
 	rc = posix_memalign(&result, 1 << alignment, size);
+
 	if (rc != 0)
-		result = NULL;
+	    result = NULL;
+	else
+	    memset(result, 0, size);
 
 	return result;
 }

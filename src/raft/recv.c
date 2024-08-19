@@ -14,66 +14,72 @@
 #include "recv_request_vote_result.h"
 #include "recv_timeout_now.h"
 #include "string.h"
+#include "../lib/coro.h"
 
 /* Dispatch a single RPC message to the appropriate handler. */
-static int recvMessage(struct raft *r, struct raft_message *message)
+static void recvMessage(struct raft *r, struct raft_message *message, int *rv)
 {
-	int rv = 0;
+	CO_REENTER(co_context(message),
+		   int dummy;
+	    );
 
 	switch (message->type) {
 		case RAFT_IO_APPEND_ENTRIES:
-			rv = recvAppendEntries(r, message->server_id,
-					       message->server_address,
-					       &message->append_entries);
-			if (rv != 0) {
+		    	CO_FUN(co_context(message),
+			       recvAppendEntries(r, message->server_id,
+						 message->server_address,
+						 message, rv));
+			if (*rv != 0) {
 				entryBatchesDestroy(
 				    message->append_entries.entries,
 				    message->append_entries.n_entries);
 			}
 			break;
 		case RAFT_IO_APPEND_ENTRIES_RESULT:
-			rv = recvAppendEntriesResult(
+			*rv = recvAppendEntriesResult(
 			    r, message->server_id, message->server_address,
 			    &message->append_entries_result);
 			break;
 		case RAFT_IO_REQUEST_VOTE:
-			rv = recvRequestVote(r, message->server_id,
-					     message->server_address,
-					     &message->request_vote);
+			*rv = recvRequestVote(r, message->server_id,
+					      message->server_address,
+					      &message->request_vote);
 			break;
 		case RAFT_IO_REQUEST_VOTE_RESULT:
-			rv = recvRequestVoteResult(
+			*rv = recvRequestVoteResult(
 			    r, message->server_id, message->server_address,
 			    &message->request_vote_result);
 			break;
 		case RAFT_IO_INSTALL_SNAPSHOT:
-			rv = recvInstallSnapshot(r, message->server_id,
-						 message->server_address,
-						 &message->install_snapshot);
+			*rv = recvInstallSnapshot(r, message->server_id,
+						  message->server_address,
+						  &message->install_snapshot);
 			/* Already installing a snapshot, wait for it and ignore
 			 * this one */
-			if (rv == RAFT_BUSY) {
+			if (*rv == RAFT_BUSY) {
 				raft_free(message->install_snapshot.data.base);
 				raft_configuration_close(
 				    &message->install_snapshot.conf);
-				rv = 0;
+				*rv = 0;
 			}
 			break;
 		case RAFT_IO_TIMEOUT_NOW:
-			rv = recvTimeoutNow(r, message->server_id,
-					    message->server_address,
-					    &message->timeout_now);
+			*rv = recvTimeoutNow(r, message->server_id,
+					     message->server_address,
+					     &message->timeout_now);
 			break;
 		default:
 			tracef("received unknown message type (%d)",
 			       message->type);
 			/* Drop message */
-			return 0;
+			*rv = 0;
+			return;
 	};
 
-	if (rv != 0 && rv != RAFT_NOCONNECTION) {
-		tracef("recv: %d: %s", message->type, raft_strerror(rv));
-		return rv;
+	if (*rv != 0 && *rv != RAFT_NOCONNECTION) {
+		tracef("recv: %d: %s", message->type, raft_strerror(*rv));
+		*rv = 0;
+		return;
 	}
 
 	/* If there's a leadership transfer in progress, check if it has
@@ -84,14 +90,21 @@ static int recvMessage(struct raft *r, struct raft_message *message)
 		}
 	}
 
-	return 0;
+	*rv = 0;
+	return;
 }
+
+#define L CO_FRAME_DATA_L
 
 void recvCb(struct raft_io *io, struct raft_message *message)
 {
-	struct raft *r = io->data;
-	int rv;
-	if (r->state == RAFT_UNAVAILABLE) {
+	CO_REENTER(co_context(message),
+		   struct raft *r;
+		   int rv;
+	);
+
+	L->r = io->data;
+	if (L->r->state == RAFT_UNAVAILABLE) {
 		switch (message->type) {
 			case RAFT_IO_APPEND_ENTRIES:
 				entryBatchesDestroy(
@@ -106,9 +119,9 @@ void recvCb(struct raft_io *io, struct raft_message *message)
 		}
 		return;
 	}
-	rv = recvMessage(r, message);
-	if (rv != 0) {
-		convertToUnavailable(r);
+	CO_FUN(co_context(message), recvMessage(L->r, message, &L->rv));
+	if (L->rv != 0) {
+		convertToUnavailable(L->r);
 	}
 }
 

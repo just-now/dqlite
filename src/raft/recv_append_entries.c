@@ -9,6 +9,7 @@
 #include "log.h"
 #include "recv.h"
 #include "replication.h"
+#include "../lib/coro.h"
 
 static void recvSendAppendEntriesResultCb(struct raft_io_send *req, int status)
 {
@@ -16,37 +17,44 @@ static void recvSendAppendEntriesResultCb(struct raft_io_send *req, int status)
 	RaftHeapFree(req);
 }
 
-int recvAppendEntries(struct raft *r,
-		      raft_id id,
-		      const char *address,
-		      const struct raft_append_entries *args)
+#define L CO_FRAME_DATA_L
+
+void recvAppendEntries(struct raft *r,
+		       raft_id id,
+		       const char *address,
+		       struct raft_message *argm,
+		       int *rv)
 {
-	struct raft_io_send *req;
-	struct raft_message message;
-	struct raft_append_entries_result *result =
-	    &message.append_entries_result;
-	int match;
-	bool async;
-	int rv;
+    	CO_REENTER(co_context(argm),
+		   struct raft_io_send *req;
+		   struct raft_message message;
+		   struct raft_append_entries_result *result;
+		   const struct raft_append_entries *args;
+		   int match;
+		   bool async;
+	);
+
+	L->result = &L->message.append_entries_result;
+	L->args = &argm->append_entries;
 
 	assert(r != NULL);
 	assert(id > 0);
-	assert(args != NULL);
+	assert(L->args != NULL);
 	assert(address != NULL);
 	tracef(
 	    "self:%llu from:%llu@%s leader_commit:%llu n_entries:%d "
 	    "prev_log_index:%llu prev_log_term:%llu, term:%llu",
-	    r->id, id, address, args->leader_commit, args->n_entries,
-	    args->prev_log_index, args->prev_log_term, args->term);
+	    r->id, id, address, L->args->leader_commit, L->args->n_entries,
+	    L->args->prev_log_index, L->args->prev_log_term, L->args->term);
 
-	result->rejected = args->prev_log_index;
-	result->last_log_index = logLastIndex(r->log);
-	result->version = RAFT_APPEND_ENTRIES_RESULT_VERSION;
-	result->features = RAFT_DEFAULT_FEATURE_FLAGS;
+	L->result->rejected = L->args->prev_log_index;
+	L->result->last_log_index = logLastIndex(r->log);
+	L->result->version = RAFT_APPEND_ENTRIES_RESULT_VERSION;
+	L->result->features = RAFT_DEFAULT_FEATURE_FLAGS;
 
-	rv = recvEnsureMatchingTerms(r, args->term, &match);
-	if (rv != 0) {
-		return rv;
+	*rv = recvEnsureMatchingTerms(r, L->args->term, &L->match);
+	if (*rv != 0) {
+		return;
 	}
 
 	/* From Figure 3.1:
@@ -54,7 +62,7 @@ int recvAppendEntries(struct raft *r,
 	 *   AppendEntries RPC: Receiver implementation: Reply false if term <
 	 *   currentTerm.
 	 */
-	if (match < 0) {
+	if (L->match < 0) {
 		tracef("local term is higher -> reject ");
 		goto reply;
 	}
@@ -89,13 +97,13 @@ int recvAppendEntries(struct raft *r,
 	 * term because at most one leader can be elected at any given term.
 	 */
 	assert(r->state == RAFT_FOLLOWER || r->state == RAFT_CANDIDATE);
-	assert(r->current_term == args->term);
+	assert(r->current_term == L->args->term);
 
 	if (r->state == RAFT_CANDIDATE) {
-		/* The current term and the peer one must match, otherwise we
+		/* The current term and the peer one must L->match, otherwise we
 		 * would have either rejected the request or stepped down to
 		 * followers. */
-		assert(match == 0);
+		assert(L->match == 0);
 		tracef("discovered leader -> step down ");
 		convertToFollower(r);
 	}
@@ -104,9 +112,9 @@ int recvAppendEntries(struct raft *r,
 
 	/* Update current leader because the term in this AppendEntries RPC is
 	 * up to date. */
-	rv = recvUpdateLeader(r, id, address);
-	if (rv != 0) {
-		return rv;
+	*rv = recvUpdateLeader(r, id, address);
+	if (*rv != 0) {
+		return;
 	}
 
 	/* Reset the election timer. */
@@ -115,53 +123,59 @@ int recvAppendEntries(struct raft *r,
 	/* If we are installing a snapshot, ignore these entries. TODO: we
 	 * should do something smarter, e.g. buffering the entries in the I/O
 	 * backend, which should be in charge of serializing everything. */
-	if (replicationInstallSnapshotBusy(r) && args->n_entries > 0) {
+	if (replicationInstallSnapshotBusy(r) && L->args->n_entries > 0) {
 		tracef("ignoring AppendEntries RPC during snapshot install");
-		entryBatchesDestroy(args->entries, args->n_entries);
-		return 0;
+		entryBatchesDestroy(L->args->entries, L->args->n_entries);
+		*rv = 0;
+		return;
 	}
 
-	rv = replicationAppend(r, args, &result->rejected, &async);
-	if (rv != 0) {
-		return rv;
+	CO_FUN(co_context(argm),
+	       replicationAppend(r, argm, &L->result->rejected,
+				 &L->async, rv));
+	if (*rv != 0) {
+		return;
 	}
 
-	if (async) {
-		return 0;
+	if (L->async) {
+		*rv = 0;
+		return;
 	}
 
 	/* Echo back to the leader the point that we reached. */
-	result->last_log_index = r->last_stored;
+	L->result->last_log_index = r->last_stored;
 
 reply:
-	result->term = r->current_term;
+	L->result->term = r->current_term;
 
 	/* Free the entries batch, if any. */
-	if (args->n_entries > 0 && args->entries[0].batch != NULL) {
-		raft_free(args->entries[0].batch);
+	if (L->args->n_entries > 0 && L->args->entries[0].batch != NULL) {
+		raft_free(L->args->entries[0].batch);
 	}
 
-	if (args->entries != NULL) {
-		raft_free(args->entries);
+	if (L->args->entries != NULL) {
+		raft_free(L->args->entries);
 	}
 
-	message.type = RAFT_IO_APPEND_ENTRIES_RESULT;
-	message.server_id = id;
-	message.server_address = address;
+	L->message.type = RAFT_IO_APPEND_ENTRIES_RESULT;
+	L->message.server_id = id;
+	L->message.server_address = address;
 
-	req = RaftHeapMalloc(sizeof *req);
-	if (req == NULL) {
-		return RAFT_NOMEM;
+	L->req = RaftHeapMalloc(sizeof *L->req);
+	if (L->req == NULL) {
+		*rv = RAFT_NOMEM;
+		return;
 	}
-	req->data = r;
+	L->req->data = r;
 
-	rv = r->io->send(r->io, req, &message, recvSendAppendEntriesResultCb);
-	if (rv != 0) {
-		raft_free(req);
-		return rv;
+	*rv = r->io->send(r->io, L->req, &L->message, recvSendAppendEntriesResultCb);
+	if (*rv != 0) {
+		raft_free(L->req);
+		return;
 	}
 
-	return 0;
+	*rv = 0;
+	return;
 }
 
 #undef tracef

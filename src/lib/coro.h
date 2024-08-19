@@ -10,8 +10,12 @@
 #include <stdio.h>
 #include "../tracing.h"
 
+#define ASSERT assert
 #define ergo ERGO
 #define LOG(arg, ...) tracef(__VA_ARGS__)
+
+struct raft_message;
+struct co_context *co_context(struct raft_message *message);
 
 enum {
 	MCC_STACK_NR            = 0x20,
@@ -49,13 +53,13 @@ struct co_context {
 
 #define CO_END(context)							\
 ({                                                                      \
-	int rc = ((context)->mc_yield ? -EAGAIN : 0);			\
-	if (rc == 0) {							\
+	int _rc = ((context)->mc_yield ? -EAGAIN : 0);			\
+	if (_rc == 0) {							\
 		ASSERT((context)->mc_frame == 0);			\
 		ASSERT((context)->mc_yield_frame == 0);			\
 		co_context_locals_free((context));			\
 	}								\
-	rc;								\
+	_rc;								\
 })
 
 #define CO_FUN(context, function)					\
@@ -75,6 +79,7 @@ struct co_context {
 })
 
 #define CO_FRAME_DATA(field) (__frame_data__->field)
+#define CO_FRAME_DATA_L __frame_data__
 
 #define CO_REENTER(context, ...)					\
 	struct foo_context {						\

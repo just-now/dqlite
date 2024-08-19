@@ -1121,45 +1121,51 @@ static int deleteConflictingEntries(struct raft *r,
 	return 0;
 }
 
-int replicationAppend(struct raft *r,
-		      const struct raft_append_entries *args,
-		      raft_index *rejected,
-		      bool *async)
-{
-	struct appendFollower *request;
-	int match;
-	size_t n;
-	size_t i;
-	size_t j;
-	bool reinstated;
-	int rv;
+#define L CO_FRAME_DATA_L
 
+void replicationAppend(struct raft *r,
+		       struct raft_message *argm,
+		       raft_index *rejected,
+		       bool *async, int *rv)
+{
+    	CO_REENTER(co_context(argm),
+		   struct raft_append_entries *args;
+		   struct appendFollower *request;
+		   int match;
+		   size_t n;
+		   size_t i;
+		   size_t j;
+		   bool reinstated;
+		);
+
+	L->args = &argm->append_entries;
 	assert(r != NULL);
-	assert(args != NULL);
+	assert(L->args != NULL);
 	assert(rejected != NULL);
 	assert(async != NULL);
 
 	assert(r->state == RAFT_FOLLOWER);
 
-	*rejected = args->prev_log_index;
+	*rejected = L->args->prev_log_index;
 	*async = false;
 
 	/* Check the log matching property. */
-	match = checkLogMatchingProperty(r, args);
-	if (match != 0) {
-		assert(match == 1 || match == -1);
-		return match == 1 ? 0 : RAFT_SHUTDOWN;
+	L->match = checkLogMatchingProperty(r, L->args);
+	if (L->match != 0) {
+		assert(L->match == 1 || L->match == -1);
+		*rv = L->match == 1 ? 0 : RAFT_SHUTDOWN;
+		return;
 	}
 
 	/* Delete conflicting entries. */
-	rv = deleteConflictingEntries(r, args, &i);
-	if (rv != 0) {
-		return rv;
+	*rv = deleteConflictingEntries(r, L->args, &L->i);
+	if (*rv != 0) {
+		return;
 	}
 
 	*rejected = 0;
 
-	n = args->n_entries - i; /* Number of new entries */
+	L->n = L->args->n_entries - L->i; /* Number of new entries */
 
 	/* If this is an empty AppendEntries, there's nothing to write. However
 	 * we still want to check if we can commit some entry. However, don't
@@ -1172,39 +1178,40 @@ int replicationAppend(struct raft *r,
 	 *   commitIndex, set commitIndex = min(leaderCommit, index of last new
 	 *   entry).
 	 */
-	if (n == 0) {
-		if ((args->leader_commit > r->commit_index) &&
+	if (L->n == 0) {
+		if ((L->args->leader_commit > r->commit_index) &&
 		    r->last_stored >= r->commit_index &&
 		    !replicationInstallSnapshotBusy(r)) {
 			r->commit_index =
-			    min(args->leader_commit, r->last_stored);
-			rv = replicationApply(r);
-			if (rv != 0) {
-				return rv;
+			    min(L->args->leader_commit, r->last_stored);
+			*rv = replicationApply(r);
+			if (*rv != 0) {
+				return;
 			}
 		}
 
-		return 0;
+		*rv = 0;
+		return;
 	}
 
 	*async = true;
 
-	request = raft_malloc(sizeof *request);
-	if (request == NULL) {
-		rv = RAFT_NOMEM;
+	L->request = raft_malloc(sizeof *L->request);
+	if (L->request == NULL) {
+		*rv = RAFT_NOMEM;
 		goto err;
 	}
 
-	request->raft = r;
-	request->args = *args;
+	L->request->raft = r;
+	L->request->args = *L->args;
 	/* Index of first new entry */
-	request->index = args->prev_log_index + 1 + i;
+	L->request->index = L->args->prev_log_index + 1 + L->i;
 
 	/* Update our in-memory log to reflect that we received these entries.
 	 * We'll notify the leader of a successful append once the write entries
-	 * request that we issue below actually completes.  */
-	for (j = 0; j < n; j++) {
-		struct raft_entry *entry = &args->entries[i + j];
+	 * L->request that we issue below actually completes.  */
+	for (L->j = 0; L->j < L->n; L->j++) {
+		struct raft_entry *entry = &L->args->entries[L->i + L->j];
 
 		/* We are trying to append an entry at index X with term T to
 		 * our in-memory log. If we've gotten this far, we know that the
@@ -1216,11 +1223,11 @@ int replicationAppend(struct raft *r,
 		 * of tracking multiple independent entries that share an index
 		 * and term, we just piggyback on the already-stored entry in
 		 * this case. */
-		rv =
-		    logReinstate(r->log, entry->term, entry->type, &reinstated);
-		if (rv != 0) {
+		*rv =
+		    logReinstate(r->log, entry->term, entry->type, &L->reinstated);
+		if (*rv != 0) {
 			goto err_after_request_alloc;
-		} else if (reinstated) {
+		} else if (L->reinstated) {
 			continue;
 		}
 
@@ -1231,63 +1238,67 @@ int replicationAppend(struct raft *r,
 		 * https://github.com/canonical/dqlite/issues/276
 		 */
 		struct raft_entry copy = {0};
-		rv = entryCopy(entry, &copy);
-		if (rv != 0) {
+		*rv = entryCopy(entry, &copy);
+		if (*rv != 0) {
 			goto err_after_request_alloc;
 		}
 
-		rv = logAppend(r->log, copy.term, copy.type, copy.buf, (struct raft_entry_local_data){}, false, NULL);
-		if (rv != 0) {
+		*rv = logAppend(r->log, copy.term, copy.type, copy.buf, (struct raft_entry_local_data){}, false, NULL);
+		if (*rv != 0) {
 			goto err_after_request_alloc;
 		}
+
+		CO_YIELD(co_context(argm));
 	}
 
 	/* Acquire the relevant entries from the log. */
-	rv = logAcquire(r->log, request->index, &request->args.entries,
-			&request->args.n_entries);
-	if (rv != 0) {
+	*rv = logAcquire(r->log, L->request->index, &L->request->args.entries,
+			 &L->request->args.n_entries);
+	if (*rv != 0) {
 		goto err_after_request_alloc;
 	}
 
-	assert(request->args.n_entries == n);
-	if (request->args.n_entries == 0) {
-		tracef("No log entries found at index %llu", request->index);
+	assert(L->request->args.n_entries == L->n);
+	if (L->request->args.n_entries == 0) {
+		tracef("No log entries found at index %llu", L->request->index);
 		ErrMsgPrintf(r->errmsg, "No log entries found at index %llu",
-			     request->index);
-		rv = RAFT_SHUTDOWN;
+			     L->request->index);
+		*rv = RAFT_SHUTDOWN;
 		goto err_after_acquire_entries;
 	}
 
-	request->req.data = request;
-	rv = r->io->append(r->io, &request->req, request->args.entries,
-			   request->args.n_entries, appendFollowerCb);
-	if (rv != 0) {
+	L->request->req.data = L->request;
+	*rv = r->io->append(r->io, &L->request->req, L->request->args.entries,
+			    L->request->args.n_entries, appendFollowerCb);
+	if (*rv != 0) {
 		ErrMsgTransfer(r->io->errmsg, r->errmsg, "io");
 		goto err_after_acquire_entries;
 	}
 	r->follower_state.append_in_flight_count += 1;
 
-	entryBatchesDestroy(args->entries, args->n_entries);
-	return 0;
+	entryBatchesDestroy(L->args->entries, L->args->n_entries);
+
+	*rv = 0;
+	return;
 
 err_after_acquire_entries:
-	/* Release the entries related to the IO request */
-	logRelease(r->log, request->index, request->args.entries,
-		   request->args.n_entries);
+	/* Release the entries related to the IO L->request */
+	logRelease(r->log, L->request->index, L->request->args.entries,
+		   L->request->args.n_entries);
 
 err_after_request_alloc:
 	/* Release all entries added to the in-memory log, making
 	 * sure the in-memory log and disk don't diverge, leading
 	 * to future log entries not being persisted to disk.
 	 */
-	if (j != 0) {
-		logTruncate(r->log, request->index);
+	if (L->j != 0) {
+		logTruncate(r->log, L->request->index);
 	}
-	raft_free(request);
+	raft_free(L->request);
 
 err:
-	assert(rv != 0);
-	return rv;
+	assert(*rv != 0);
+	return;
 }
 
 struct recvInstallSnapshot

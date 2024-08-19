@@ -6,9 +6,9 @@
 #include "../raft.h"
 
 /* Process an AppendEntries RPC from the given server. */
-int recvAppendEntries(struct raft *r,
-		      raft_id id,
-		      const char *address,
-		      const struct raft_append_entries *args);
+void recvAppendEntries(struct raft *r,
+		       raft_id id,
+		       const char *address,
+		       struct raft_message *args, int *rv);
 
 #endif /* RECV_APPEND_ENTRIES_H_ */

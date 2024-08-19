@@ -66,10 +66,10 @@ int replicationUpdate(struct raft *r,
  * the disk write completes and the I/O callback is invoked.
  *
  * It must be called only by followers. */
-int replicationAppend(struct raft *r,
-		      const struct raft_append_entries *args,
-		      raft_index *rejected,
-		      bool *async);
+void replicationAppend(struct raft *r,
+		       struct raft_message *args,
+		       raft_index *rejected,
+		       bool *async, int *rv);
 
 int replicationInstallSnapshot(struct raft *r,
 			       const struct raft_install_snapshot *args,

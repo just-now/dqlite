@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +13,8 @@
 #include "log.h"
 #include "../lib/queue.h"
 #include "snapshot.h"
+#include "../lib/coro.h"
+#include "src/utils.h"
 
 /* Defaults */
 #define HEARTBEAT_TIMEOUT 100
@@ -121,6 +124,7 @@ struct transmit
 {
 	REQUEST;
 	struct raft_message message; /* Message to deliver */
+	struct co_context   context; /* WIP(Anatoliy) */
 	int timer;                   /* Deliver after this n of msecs. */
 };
 
@@ -754,9 +758,23 @@ static int ioMethodSend(struct raft_io *raft_io,
 	return 0;
 }
 
-static void ioReceive(struct io *io, struct raft_message *message)
+struct co_context *co_context(struct raft_message *message)
 {
-	io->recv_cb(io->io, message);
+	struct transmit *t = CONTAINER_OF(message, struct transmit, message);
+	return &t->context;
+}
+
+static void ioReceive(struct io *io, struct transmit *transmit)
+{
+	struct raft_message *message = &transmit->message;
+	int rc;
+
+	do {
+		CO_START(&transmit->context);
+		io->recv_cb(io->io, message);
+		rc = CO_END(&transmit->context);
+	} while (rc == -EAGAIN);
+
 	io->n_recv[message->type]++;
 }
 
@@ -784,7 +802,11 @@ static void ioDeliverTransmit(struct io *io, struct transmit *transmit)
 	message->server_id = io->id;
 	message->server_address = io->address;
 
-	ioReceive(peer->io, message);
+	transmit->context = (struct co_context) {};
+	int rc = co_context_init(&transmit->context);
+	assert(rc == 0);
+	ioReceive(peer->io, transmit);
+	co_context_fini(&transmit->context);
 	raft_free(transmit);
 }
 
