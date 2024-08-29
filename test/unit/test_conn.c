@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "../lib/client.h"
 #include "../lib/config.h"
 #include "../lib/heap.h"
@@ -397,12 +398,36 @@ TEST_TEAR_DOWN(query)
 	free(f);
 }
 
+static void alarm_cb(int signum)
+{
+	void *array[30];
+	size_t size;
+	(void) signum;
+
+	size = backtrace(array, ARRAY_SIZE(array));
+	backtrace_symbols_fd(array, size, STDERR_FILENO);
+}
+
+static void set_alarm(int seconds)
+{
+	struct sigaction sa = {
+		.sa_handler = &alarm_cb,
+		.sa_flags = SA_RESTART,
+	};
+
+	sigaction(SIGALRM, &sa, NULL);
+	alarm(seconds);
+}
+
 /* Perform a query yielding one row. */
 TEST_CASE(query, one, NULL)
 {
 	struct query_fixture *f = data;
 	struct row *row;
 	(void)params;
+
+	set_alarm(5);
+
 	PREPARE_CONN("SELECT n FROM test", &f->stmt_id);
 	QUERY_CONN(f->stmt_id, &f->rows);
 	munit_assert_int(f->rows.column_count, ==, 1);
@@ -412,5 +437,7 @@ TEST_CASE(query, one, NULL)
 	munit_assert_ptr_null(row->next);
 	munit_assert_int(row->values[0].type, ==, SQLITE_INTEGER);
 	munit_assert_int(row->values[0].integer, ==, 123);
+
+	set_alarm(0); /* clear alarm */
 	return MUNIT_OK;
 }
